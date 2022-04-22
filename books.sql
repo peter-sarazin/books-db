@@ -115,19 +115,18 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `books`.`book_author` ;
 
 CREATE TABLE IF NOT EXISTS `books`.`book_author` (
-  `person_id` INT(10) NOT NULL,
   `book_id` INT NOT NULL,
-  PRIMARY KEY (`person_id`),
-  INDEX `fk_book_author_has_person_idx` (`person_id` ASC) VISIBLE,
+  `person_id` INT(10) NOT NULL,
   INDEX `fk_book_author_has_book_idx` (`book_id` ASC) VISIBLE,
-  CONSTRAINT `fk_AuthorsBookEditions_Authors1`
-    FOREIGN KEY (`person_id`)
-    REFERENCES `books`.`person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_book_author_person1_idx` (`person_id` ASC) VISIBLE,
   CONSTRAINT `fk_book_author_book1`
     FOREIGN KEY (`book_id`)
     REFERENCES `books`.`book` (`book_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book_author_person1`
+    FOREIGN KEY (`person_id`)
+    REFERENCES `books`.`person` (`person_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -240,7 +239,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `books`;
-INSERT INTO `books`.`book_author` (`person_id`, `book_id`) VALUES (6, 1);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (1, 6);
 
 COMMIT;
 
