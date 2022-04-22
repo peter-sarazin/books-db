@@ -6,6 +6,6 @@ books.mwb is the MySQL Workbench file fo the database design.
 
 There is a small sample of data provided as insert statements.
 
-books.sql is the database creation scipt generated from MySQL Workbench.
+books.sql is the database creation script generated from MySQL Workbench.
 
 <img src="books-data-model.png">

@@ -74,33 +74,6 @@ KEY_BLOCK_SIZE = 16;
 
 
 -- -----------------------------------------------------
--- Table `books`.`publisher_series`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `books`.`publisher_series` ;
-
-CREATE TABLE IF NOT EXISTS `books`.`publisher_series` (
-  `publisher_series_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `publisher_id` INT(10) NOT NULL,
-  `series_id` INT(10) NULL,
-  INDEX `fk_publisher_series_has_series_idx` (`series_id` ASC) VISIBLE,
-  INDEX `fk_publisher_series_has_publisher_idx` (`publisher_id` ASC) VISIBLE,
-  PRIMARY KEY (`publisher_series_id`),
-  UNIQUE INDEX `index4` (`publisher_id` ASC, `series_id` ASC) VISIBLE,
-  CONSTRAINT `fk_publisher_has_series_publisher1`
-    FOREIGN KEY (`publisher_id`)
-    REFERENCES `books`.`publisher` (`publisher_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_publisher_has_series_series1`
-    FOREIGN KEY (`series_id`)
-    REFERENCES `books`.`series` (`series_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
 -- Table `books`.`book`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `books`.`book` ;
@@ -108,22 +81,29 @@ DROP TABLE IF EXISTS `books`.`book` ;
 CREATE TABLE IF NOT EXISTS `books`.`book` (
   `book_id` INT NOT NULL AUTO_INCREMENT,
   `book_title_id` INT(10) NOT NULL,
+  `publisher_id` INT(10) NOT NULL,
+  `series_id` INT(10) NOT NULL,
   `edition` INT(10) NOT NULL DEFAULT 1,
-  `publisher_series_id` INT(10) NOT NULL,
   `isbn10` VARCHAR(10) NULL,
   `isbn13` VARCHAR(13) NULL,
   `url` VARCHAR(255) NULL,
   PRIMARY KEY (`book_id`),
-  INDEX `fk_book_has_publisher_series_idx` (`publisher_series_id` ASC) VISIBLE,
   INDEX `fk_book_has_book_title_idx` (`book_title_id` ASC) VISIBLE,
-  CONSTRAINT `fk_book_edition_publisher_series1`
-    FOREIGN KEY (`publisher_series_id`)
-    REFERENCES `books`.`publisher_series` (`publisher_series_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_book_publisher1_idx` (`publisher_id` ASC) VISIBLE,
+  INDEX `fk_book_series1_idx` (`series_id` ASC) VISIBLE,
   CONSTRAINT `fk_book_edition_book_title1`
     FOREIGN KEY (`book_title_id`)
     REFERENCES `books`.`book_title` (`book_title_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book_publisher1`
+    FOREIGN KEY (`publisher_id`)
+    REFERENCES `books`.`publisher` (`publisher_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book_series1`
+    FOREIGN KEY (`series_id`)
+    REFERENCES `books`.`series` (`series_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -246,21 +226,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `books`.`publisher_series`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `books`;
-INSERT INTO `books`.`publisher_series` (`publisher_series_id`, `publisher_id`, `series_id`) VALUES (1, 1, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `books`.`book`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `books`;
-INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `edition`, `publisher_series_id`, `isbn10`, `isbn13`, `url`) VALUES (1, 3, 5, 1, NULL, '9781617294945', 'https://www.manning.com/books/spring-in-action-fifth-edition');
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (1, 3, 1, 1, 5, NULL, '9781617294945', 'https://www.manning.com/books/spring-in-action-fifth-edition');
 
 COMMIT;
 
