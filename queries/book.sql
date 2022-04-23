@@ -1,13 +1,13 @@
 // book summary
 
-select b.book_id, bt.title, b.edition, b.isbn10, b.isbn13, p.publisher_name, s.series_name from book b
+select b.book_id, bt.title, bt.subtitle, b.edition, b.isbn10, b.isbn13, p.publisher_name, s.series_name from book b
 left join book_title bt on bt.book_title_id = b.book_title_id
 left join publisher p on p.publisher_id = b.publisher_id
 left join series s on s.series_id = b.series_id
 
 // book detail
 
-select b.book_id, bt.title, b.edition, b.isbn10, b.isbn13, p.publisher_name, s.series_name, pe.first_name, pe.middle_name, pe.last_name,
+select b.book_id, bt.title, bt.subtitle, b.edition, b.isbn10, b.isbn13, p.publisher_name, s.series_name, pe.first_name, pe.middle_name, pe.last_name,
 br.name as retailer, bp.purchase_date, bp.purchase_price 
 from book b
 left join book_title bt on bt.book_title_id = b.book_title_id
