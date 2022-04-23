@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS `books`.`publisher` ;
 
 CREATE TABLE IF NOT EXISTS `books`.`publisher` (
   `publisher_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `publisher_name` VARCHAR(45) NULL DEFAULT NULL,
+  `publisher_name` VARCHAR(45) NOT NULL,
   `url` VARCHAR(255) NULL,
   PRIMARY KEY (`publisher_id`))
 ENGINE = InnoDB
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `books`.`book` (
   `book_id` INT NOT NULL AUTO_INCREMENT,
   `book_title_id` INT(10) NOT NULL,
   `publisher_id` INT(10) NOT NULL,
-  `series_id` INT(10) NOT NULL,
+  `series_id` INT(10) NULL,
   `edition` INT(10) NOT NULL DEFAULT 1,
   `isbn10` VARCHAR(10) NULL,
   `isbn13` VARCHAR(13) NULL,
@@ -185,6 +185,8 @@ INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_na
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (4, 'Josh', NULL, 'Long');
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (5, 'Daniel', NULL, 'Rubio');
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (6, 'Craig', NULL, 'Walls');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (7, 'Andrew', NULL, 'Hunt');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (8, 'David', NULL, 'Thomas');
 
 COMMIT;
 
@@ -197,6 +199,8 @@ USE `books`;
 INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (1, 'Spring Recipies', 'A Problem-Solution Approach', NULL, NULL);
 INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (2, 'Java Persistence with Hibernate', 'Revised Edition of Hibernate in Action', NULL, NULL);
 INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (3, 'Spring In Action', NULL, NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (4, 'The Little Book of Adventure Game Programming in Java', NULL, NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (5, 'The Pragmatic Programmer', 'from journeyman to master', NULL, NULL);
 
 COMMIT;
 
@@ -210,6 +214,7 @@ INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES
 INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (2, 'Apress', 'http://www.apress.com');
 INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (3, 'Packt Publishing Ltd.', 'http://packtpub.com');
 INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (4, 'bitwise books', 'http://www.bitwisebooks.com');
+INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (5, 'Addison-Wesley', NULL);
 
 COMMIT;
 
@@ -220,6 +225,7 @@ COMMIT;
 START TRANSACTION;
 USE `books`;
 INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (1, 'In Action');
+INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (2, 'The Little Book of');
 
 COMMIT;
 
@@ -230,6 +236,8 @@ COMMIT;
 START TRANSACTION;
 USE `books`;
 INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (1, 3, 1, 1, 5, NULL, '9781617294945', 'https://www.manning.com/books/spring-in-action-fifth-edition');
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (2, 4, 4, 2, 1, NULL, '9781913132132', 'http://bitwisebooks.com/books/little-book-of-adventure-game-programming-in-java/');
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (3, 5, 5, NULL, 1, '020161622X', NULL, NULL);
 
 COMMIT;
 
@@ -240,6 +248,30 @@ COMMIT;
 START TRANSACTION;
 USE `books`;
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (1, 6);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (3, 7);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (3, 8);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `books`.`book_retailer`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `books`;
+INSERT INTO `books`.`book_retailer` (`book_retailer_id`, `name`, `url`) VALUES (1, 'Amazon', 'http://www.amazon.com');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `books`.`book_purchase`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `books`;
+INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (1, 1, 25.23, '2021-04-11');
+INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (2, 1, 20.18, '2022-04-18');
+INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (3, 1, 33.96, '2006-10-2');
 
 COMMIT;
 
