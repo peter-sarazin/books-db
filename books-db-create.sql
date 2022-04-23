@@ -187,6 +187,7 @@ INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_na
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (6, 'Craig', NULL, 'Walls');
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (7, 'Andrew', NULL, 'Hunt');
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (8, 'David', NULL, 'Thomas');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (9, 'Huw', NULL, 'Collingbourne');
 
 COMMIT;
 
@@ -250,6 +251,7 @@ USE `books`;
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (1, 6);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (3, 7);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (3, 8);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (2, 9);
 
 COMMIT;
 
