@@ -2,7 +2,7 @@
 
 The books database is just a sandbox database to be used in other code examples and demos.
 
-books.mwb is the MySQL Workbench file fo the database design.
+books.mwb is the MySQL Workbench file of the database design.
 
 There is a small sample of data provided as insert statements.
 
