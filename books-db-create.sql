@@ -188,6 +188,13 @@ INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_na
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (7, 'Andrew', NULL, 'Hunt');
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (8, 'David', NULL, 'Thomas');
 INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (9, 'Huw', NULL, 'Collingbourne');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (10, 'Brian', 'W', 'Kernighan');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (11, 'Dennis', 'MacAlistar', 'Ritchie');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (12, 'Scott', NULL, 'Meyers');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (13, 'Kent', NULL, 'Beck');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (14, 'Eric', NULL, 'Freeman');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (15, 'Elisabeth', NULL, 'Robson');
+INSERT INTO `books`.`person` (`person_id`, `first_name`, `middle_name`, `last_name`) VALUES (16, 'Katamreddy Siva', 'Prasad', 'Reddy');
 
 COMMIT;
 
@@ -197,11 +204,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `books`;
-INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (1, 'Spring Recipies', 'A Problem-Solution Approach', NULL, NULL);
-INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (2, 'Java Persistence with Hibernate', 'Revised Edition of Hibernate in Action', NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (1, 'The C Programming Language', 'ANSI C', NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (2, 'Effective C++', '50 Specific Ways to Improve Your Programs and Designs', NULL, NULL);
 INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (3, 'Spring In Action', NULL, NULL, NULL);
 INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (4, 'The Little Book of Adventure Game Programming in Java', NULL, NULL, NULL);
 INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (5, 'The Pragmatic Programmer', 'from journeyman to master', NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (6, 'Test-Driven Development', 'By Example', NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (7, 'Head First Design Patterns', 'Building Extensible & Maintainable Object-Oriented Software', NULL, NULL);
+INSERT INTO `books`.`book_title` (`book_title_id`, `title`, `subtitle`, `volume`, `volume_title`) VALUES (8, 'Java Persistence with MyBatis 3', 'A practical guide to MyBatis, a simple yet  powerful Java Persistence Framework!', NULL, NULL);
 
 COMMIT;
 
@@ -216,6 +226,8 @@ INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES
 INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (3, 'Packt Publishing Ltd.', 'http://packtpub.com');
 INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (4, 'bitwise books', 'http://www.bitwisebooks.com');
 INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (5, 'Addison-Wesley', NULL);
+INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (6, 'Prentice Hall Software Series', NULL);
+INSERT INTO `books`.`publisher` (`publisher_id`, `publisher_name`, `url`) VALUES (7, 'O\'Reilly Media, Inc.', 'https://www.oreilly.com/');
 
 COMMIT;
 
@@ -227,6 +239,9 @@ START TRANSACTION;
 USE `books`;
 INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (1, 'In Action');
 INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (2, 'The Little Book of');
+INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (3, 'Addison-Wesley Professional Computing Series');
+INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (4, 'The Addison-Wesley Signature Series');
+INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (5, 'Head First');
 
 COMMIT;
 
@@ -239,6 +254,11 @@ USE `books`;
 INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (1, 3, 1, 1, 5, NULL, '9781617294945', 'https://www.manning.com/books/spring-in-action-fifth-edition');
 INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (2, 4, 4, 2, 1, NULL, '9781913132132', 'http://bitwisebooks.com/books/little-book-of-adventure-game-programming-in-java/');
 INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (3, 5, 5, NULL, 1, '020161622X', NULL, NULL);
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (4, 1, 6, NULL, 2, '0131103709', NULL, NULL);
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (5, 2, 5, 3, 1, '0201563649', NULL, NULL);
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (6, 6, 5, 4, 1, '0321146530', '9780321146533', NULL);
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (7, 7, 7, 5, 2, NULL, '9781492078005', 'https://www.oreilly.com/library/view/head-first-design/9781492077992/');
+INSERT INTO `books`.`book` (`book_id`, `book_title_id`, `publisher_id`, `series_id`, `edition`, `isbn10`, `isbn13`, `url`) VALUES (8, 8, 3, NULL, 1, NULL, '9787782166801', 'https://www.packtpub.com/product/java-persistence-with-mybatis-3/9781782166801');
 
 COMMIT;
 
@@ -252,6 +272,13 @@ INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (1, 6);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (3, 7);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (3, 8);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (2, 9);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (4, 10);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (4, 11);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (5, 12);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (6, 13);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (7, 14);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (7, 15);
+INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (8, 16);
 
 COMMIT;
 
@@ -274,6 +301,9 @@ USE `books`;
 INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (1, 1, 25.23, '2021-04-11');
 INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (2, 1, 20.18, '2022-04-18');
 INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (3, 1, 33.96, '2006-10-2');
+INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (6, 1, 32.78, '2013-03-15');
+INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (7, 1, 41.45, '2021-04-11');
+INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (8, 1, 29.99, '2019-02-13');
 
 COMMIT;
 
