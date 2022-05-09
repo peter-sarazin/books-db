@@ -10,10 +10,3 @@ books-db-create.sql is the database creation script generated from MySQL Workben
 
 <img src="books-data-model.png">
 
-
-## SQL commands to create the configured database user and grant permissions
-
-```sql
-create user 'books_user'@'localhost' identified by 'password';
-grant all on books.* to 'books_user'@'localhost';
-```
