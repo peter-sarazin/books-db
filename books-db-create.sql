@@ -68,7 +68,14 @@ DROP TABLE IF EXISTS `books`.`series` ;
 CREATE TABLE IF NOT EXISTS `books`.`series` (
   `series_id` INT(10) NOT NULL AUTO_INCREMENT,
   `series_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`series_id`))
+  `publisher_id` INT(10) NOT NULL,
+  PRIMARY KEY (`series_id`),
+  INDEX `fk_series_publisher1_idx` (`publisher_id` ASC) VISIBLE,
+  CONSTRAINT `fk_series_publisher1`
+    FOREIGN KEY (`publisher_id`)
+    REFERENCES `books`.`publisher` (`publisher_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 KEY_BLOCK_SIZE = 16;
 
@@ -127,44 +134,6 @@ CREATE TABLE IF NOT EXISTS `books`.`book_author` (
   CONSTRAINT `fk_book_author_person1`
     FOREIGN KEY (`person_id`)
     REFERENCES `books`.`person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `books`.`book_retailer`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `books`.`book_retailer` ;
-
-CREATE TABLE IF NOT EXISTS `books`.`book_retailer` (
-  `book_retailer_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `url` VARCHAR(255) NULL,
-  PRIMARY KEY (`book_retailer_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `books`.`book_purchase`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `books`.`book_purchase` ;
-
-CREATE TABLE IF NOT EXISTS `books`.`book_purchase` (
-  `book_id` INT NOT NULL,
-  `book_retailer_id` INT NOT NULL,
-  `purchase_price` DOUBLE NULL,
-  `purchase_date` DATE NULL,
-  INDEX `fk_book_purchase_has_book_retailer_idx` (`book_retailer_id` ASC) VISIBLE,
-  INDEX `fk_book_purchase_has_book_idx` (`book_id` ASC) VISIBLE,
-  CONSTRAINT `fk_book_purchase_book_retailer1`
-    FOREIGN KEY (`book_retailer_id`)
-    REFERENCES `books`.`book_retailer` (`book_retailer_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_book_purchase_book1`
-    FOREIGN KEY (`book_id`)
-    REFERENCES `books`.`book` (`book_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -237,11 +206,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `books`;
-INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (1, 'In Action');
-INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (2, 'The Little Book of');
-INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (3, 'Addison-Wesley Professional Computing Series');
-INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (4, 'The Addison-Wesley Signature Series');
-INSERT INTO `books`.`series` (`series_id`, `series_name`) VALUES (5, 'Head First');
+INSERT INTO `books`.`series` (`series_id`, `series_name`, `publisher_id`) VALUES (1, 'In Action', 1);
+INSERT INTO `books`.`series` (`series_id`, `series_name`, `publisher_id`) VALUES (2, 'The Little Book of', 4);
+INSERT INTO `books`.`series` (`series_id`, `series_name`, `publisher_id`) VALUES (3, 'Professional Computing Series', 5);
+INSERT INTO `books`.`series` (`series_id`, `series_name`, `publisher_id`) VALUES (4, 'Signature Series', 5);
+INSERT INTO `books`.`series` (`series_id`, `series_name`, `publisher_id`) VALUES (5, 'Head First', 7);
 
 COMMIT;
 
@@ -279,31 +248,6 @@ INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (6, 13);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (7, 14);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (7, 15);
 INSERT INTO `books`.`book_author` (`book_id`, `person_id`) VALUES (8, 16);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `books`.`book_retailer`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `books`;
-INSERT INTO `books`.`book_retailer` (`book_retailer_id`, `name`, `url`) VALUES (1, 'Amazon', 'http://www.amazon.com');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `books`.`book_purchase`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `books`;
-INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (1, 1, 25.23, '2021-04-11');
-INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (2, 1, 20.18, '2022-04-18');
-INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (3, 1, 33.96, '2006-10-2');
-INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (6, 1, 32.78, '2013-03-15');
-INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (7, 1, 41.45, '2021-04-11');
-INSERT INTO `books`.`book_purchase` (`book_id`, `book_retailer_id`, `purchase_price`, `purchase_date`) VALUES (8, 1, 29.99, '2019-02-13');
 
 COMMIT;
 
